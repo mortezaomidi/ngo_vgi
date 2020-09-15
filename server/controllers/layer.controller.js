@@ -1,92 +1,87 @@
-import User from '../models/user.model'
+import Layer from '../models/layer.model'
 import extend from 'lodash/extend'
 import errorHandler from './../helpers/dbErrorHandler'
 
 const create = async (req, res) => {
-    const user = new User(req.body);
+
+    const layer = new Layer(req.body);
     try {
-        await user.save();
+        await layer.save();
         return res.status(200).json({
-            message: "Successfully signed up!"
+            message: "Successfully layer is added!"
         })
     } catch (err) {
         return res.status(400).json({
             error: errorHandler.getErrorMessage(err)
         })
     }
-}
+};
 
 /**
  * Load user and append to req.
  */
-const userByID = async (req, res, next, id) => {
+const layerByID = async (req, res, next, id) => {
     try {
-        let user = await User.findById(id);
-        if (!user)
+        let layer = await Layer.findById(id);
+        if (!layer)
             return res.status('400').json({
-                error: "User not found"
-            })
-        req.profile = user;
+                error: "layer not found"
+            });
+        req.profile = layer;
         next()
     } catch (err) {
         return res.status('400').json({
-            error: "Could not retrieve user"
+            error: "Could not retrieve layer"
         })
     }
-}
+};
 
 const read = (req, res) => {
-    req.profile.hashed_password = undefined;
-    req.profile.salt = undefined;
     return res.json(req.profile)
-}
+};
 
 const list = async (req, res) => {
     try {
-        let users = await User.find().select('name email updatedAt createdAt');
-        res.json(users)
+        let layers = await Layer.find().select('name geometry user createdAt updatedAt');
+        res.json(layers)
     } catch (err) {
         return res.status(400).json({
             error: errorHandler.getErrorMessage(err)
         })
     }
-}
+};
 
 const update = async (req, res) => {
     try {
-        let user = req.profile;
-        user = extend(user, req.body);
-        user.updated = Date.now();
-        await user.save();
-        user.hashed_password = undefined;
-        user.salt = undefined;
-        res.json(user);
+        let layer = req.profile;
+        layer = extend(layer, req.body);
+        layer.updated = Date.now();
+        await layer.save();
+        res.json(layer);
     } catch (err) {
         return res.status(400).json({
             error: errorHandler.getErrorMessage(err)
         })
     }
-}
+};
 
 const remove = async (req, res) => {
     try {
-        let user = req.profile;
-        let deletedUser = await user.remove();
-        deletedUser.hashed_password = undefined;
-        deletedUser.salt = undefined;
-        res.json(deletedUser);
+        let layer = req.profile;
+        let deletedLayer = await layer.remove();
+        res.json(deletedLayer);
     } catch (err) {
         return res.status(400).json({
             error: errorHandler.getErrorMessage(err)
         })
     }
-}
+};
 
 export default {
     create,
-    userByID,
+    layerByID,
     read,
     list,
     remove,
     update
-}
+};

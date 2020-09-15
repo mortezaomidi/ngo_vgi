@@ -11,6 +11,8 @@ import Template from './../template';
 
 import userRoutes from './routes/user.routes';
 import authRoutes from './routes/auth.routes';
+import layerRoutes from './routes/layer.routes';
+import layerSpecsRoutes from './routes/layerSpecs.routes';
 
 
 const CURRENT_WORKING_DIR = process.cwd();
@@ -33,6 +35,8 @@ app.use('/dist', express.static(path.join(CURRENT_WORKING_DIR, 'dist')));
 
 app.use('/', userRoutes);
 app.use('/', authRoutes);
+app.use('/', layerRoutes);
+app.use('/', layerSpecsRoutes);
 
 app.get('*', (req,res) => {
     res.status(200).send(Template());
@@ -46,6 +50,6 @@ app.use((err, req, res, next) => {
         res.status(400).json({"error" : err.name + ": " + err.message})
         console.log(err)
     }
-})
+});
 
 export default app

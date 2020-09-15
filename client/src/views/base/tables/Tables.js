@@ -10,7 +10,6 @@ import {
 } from '@coreui/react'
 import { DocsLink } from '../../../reusable'
 
-import usersData from '../../users/UsersData'
 
 const getBadge = status => {
   switch (status) {
@@ -35,7 +34,6 @@ const Tables = () => {
             </CCardHeader>
             <CCardBody>
             <CDataTable
-              items={usersData}
               fields={fields}
               itemsPerPage={5}
               pagination

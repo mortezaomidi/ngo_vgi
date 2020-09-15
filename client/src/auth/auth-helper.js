@@ -1,4 +1,4 @@
-import { signout } from './api-auth.js'
+import { signout } from './api-auth.js';
 
 const auth = {
   isAuthenticated() {
@@ -6,13 +6,13 @@ const auth = {
       return false;
 
     if (sessionStorage.getItem('jwt'))
-      return JSON.parse(sessionStorage.getItem('jwt'))
+      return JSON.parse(sessionStorage.getItem('jwt'));
     else
       return false
   },
   authenticate(jwt, cb) {
     if (typeof window !== "undefined")
-      sessionStorage.setItem('jwt', JSON.stringify(jwt))
+      sessionStorage.setItem('jwt', JSON.stringify(jwt));
     cb()
   },
   clearJWT(cb) {
@@ -23,7 +23,14 @@ const auth = {
     signout().then((data) => {
       document.cookie = "t=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
     })
+  },
+  getToken(){
+    let info = JSON.parse(sessionStorage.getItem('jwt'));
+    let user = info['user'];
+    if(user){
+      return user;
+    }
   }
-}
+};
 
 export default auth

@@ -1,34 +1,22 @@
-const create = async (user) => {
+const createSpecs = async (params, layerSpecs) => {
   try {
-    let response = await fetch('/api/users/', {
+    let response = await fetch('/api/layersSpecs/'+ params.layerId, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(user)
-    })
+      body: JSON.stringify(layerSpecs)
+    });
     return await response.json()
   } catch(err) {
     console.log(err)
   }
-}
+};
 
-const list = async (signal) => {
+const readSpecs = async (params, credentials, signal) => {
   try {
-    let response = await fetch('/api/users/', {
-      method: 'GET',
-      signal: signal,
-    })
-    return await response.json()
-  } catch(err) {
-    console.log(err)
-  }
-}
-
-const read = async (params, credentials, signal) => {
-  try {
-    let response = await fetch('/api/users/' + params.userId, {
+    let response = await fetch('/api/layersSpecs/' + params.layerId, {
       method: 'GET',
       signal: signal,
       headers: {
@@ -41,17 +29,16 @@ const read = async (params, credentials, signal) => {
   } catch(err) {
     console.log(err)
   }
-}
+};
 
-const update = async (params, user) => {
+const removeSpecs = async (params) => {
   try {
-    let response = await fetch('/api/users/' + params.userId, {
-      method: 'PUT',
+    let response = await fetch('/api/layersSpecs/' + params.layerSpecsId, {
+      method: 'DELETE',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(user)
+      }
     });
     return await response.json()
   } catch(err) {
@@ -59,25 +46,24 @@ const update = async (params, user) => {
   }
 };
 
-const remove = async (params) => {
+const removeLayerSpecs = async (params) => {
   try {
-    let response = await fetch('/api/users/' + params.userId, {
+    let response = await fetch('/api/layersSpecs/'+ params.layerId, {
       method: 'DELETE',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       }
-    })
+    });
     return await response.json()
   } catch(err) {
     console.log(err)
   }
-}
+};
 
 export {
-  create,
-  list,
-  read,
-  update,
-  remove
+  createSpecs,
+  readSpecs,
+  removeSpecs,
+  removeLayerSpecs
 }

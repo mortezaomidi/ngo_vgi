@@ -35,11 +35,16 @@ const Modals = React.lazy(() => import('./views/notifications/modals/Modals'));
 const Colors = React.lazy(() => import('./views/theme/colors/Colors'));
 const Typography = React.lazy(() => import('./views/theme/typography/Typography'));
 const Widgets = React.lazy(() => import('./views/widgets/Widgets'));
-const Users = React.lazy(() => import('./views/users/Users'));
-const User = React.lazy(() => import('./views/users/User'));
+const Users = React.lazy(() => import('./views/user/Users'));
+const SignUp = React.lazy(() => import('./views/user/SignUp'));
+const EditUser = React.lazy(() => import('./views/user/EditUser'));
+const Layers = React.lazy(() => import('./views/layer/Layers'));
+const CreateLayer = React.lazy(() => import('./views/layer/CreateLayer'));
+const EditLayer = React.lazy(() => import('./views/layer/EditLayer'));
+const Features = React.lazy(() => import('./views/feature/Features'));
 
 const routes = [
-  { path: '/', exact: true, name: 'Home' },
+  { path: '/', exact: true, name: 'خانه' },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
   { path: '/theme', name: 'Theme', component: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', component: Colors },
@@ -77,8 +82,13 @@ const routes = [
   { path: '/notifications/modals', name: 'Modals', component: Modals },
   { path: '/notifications/toaster', name: 'Toaster', component: Toaster },
   { path: '/widgets', name: 'Widgets', component: Widgets },
-  { path: '/users', exact: true,  name: 'Users', component: Users },
-  { path: '/users/:id', exact: true, name: 'User Details', component: User }
+  { path: '/register', name: 'ثبت نام کاربر', component: SignUp },
+  { path: '/users', exact: true, name: 'مدیریت کاربران', component: Users },
+  { path: '/users/:userId', name: 'ویراش کاربر', component: EditUser },
+  { path: '/layers', exact: true, name: 'مدیریت لایه ها', component: Layers },
+  { path: '/layers/createLayer', exact: true, name: 'اضافه کردن لایه', component: CreateLayer },
+  { path: '/layers/:layerId', exact: true, name: 'ویرایش لایه', component: EditLayer },
+  { path: '/features', exact: true, name: 'ویرایش لایه', component: Features },
 ];
 
 export default routes;

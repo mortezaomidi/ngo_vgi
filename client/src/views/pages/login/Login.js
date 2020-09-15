@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Link } from 'react-router-dom'
 import {
   CButton,
@@ -14,9 +14,45 @@ import {
   CInputGroupText,
   CRow
 } from '@coreui/react'
-import CIcon from '@coreui/icons-react'
+import CIcon from '@coreui/icons-react';
+import Recaptcha from 'react-recaptcha';
 
-const Login = () => {
+import classes from "../../user/user.module.css";
+import {signin} from "../../../auth/api-auth";
+import auth from "../../../auth/auth-helper";
+
+const Login = (props) => {
+
+  const [values, setValues] = useState({
+    email: '',
+    password: '',
+    error: '',
+    redirectToReferrer: false
+  });
+
+  const handleChange = name => event => {
+    setValues({ ...values, [name]: event.target.value })
+  };
+
+  const clickSubmit = () => {
+    const user = {
+      email: values.email || undefined,
+      password: values.password || undefined
+    };
+
+    signin(user).then((data) => {
+      if (data.error) {
+        setValues({ ...values, error: data.error})
+        console.log(data.error);
+      } else {
+        auth.authenticate(data, () => {
+          setValues({ ...values, error: ''})
+        });
+        props.history.replace('./dashboard');
+      }
+    })
+  };
+
   return (
     <div className="c-app c-default-layout flex-row align-items-center">
       <CContainer>
@@ -31,38 +67,51 @@ const Login = () => {
                     <CInputGroup className="mb-3">
                       <CInputGroupPrepend>
                         <CInputGroupText>
-                          <CIcon name="cil-user" />
+                          <CIcon name="cil-user"/>
                         </CInputGroupText>
                       </CInputGroupPrepend>
-                      <CInput type="text" placeholder="Username" autoComplete="username" />
+                      <CInput
+                        type="email"
+                        placeholder="Email"
+                        autoComplete="email"
+                        className={classes.placeholderStyle}
+                        value={values.email}
+                        onChange={handleChange('email')}
+                      />
                     </CInputGroup>
                     <CInputGroup className="mb-4">
                       <CInputGroupPrepend>
                         <CInputGroupText>
-                          <CIcon name="cil-lock-locked" />
+                          <CIcon name="cil-lock-locked"/>
                         </CInputGroupText>
                       </CInputGroupPrepend>
-                      <CInput type="password" placeholder="Password" autoComplete="current-password" />
+                      <CInput
+                        type="password"
+                        placeholder="Password"
+                        autoComplete="current-password"
+                        className={classes.placeholderStyle}
+                        value={values.password}
+                        onChange={handleChange('password')}
+                      />
                     </CInputGroup>
                     <CRow>
                       <CCol xs="6">
-                        <CButton color="primary" className="px-4">Login</CButton>
-                      </CCol>
-                      <CCol xs="6" className="text-right">
-                        <CButton color="link" className="px-0">Forgot password?</CButton>
+                        <CButton color="primary" className="px-4" onClick={()=>clickSubmit()}>Login</CButton>
                       </CCol>
                     </CRow>
                   </CForm>
                 </CCardBody>
               </CCard>
-              <CCard className="text-white bg-primary py-5 d-md-down-none" style={{ width: '44%' }}>
+              <CCard className="text-white bg-primary py-5 d-md-down-none" style={{width: '44%'}}>
                 <CCardBody className="text-center">
                   <div>
-                    <h2>Sign up</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                      labore et dolore magna aliqua.</p>
+                    <h4>سازمان جغرافیایی نیروهای مسلح</h4>
+                    <br/>
+                    <p>داشبورد مدیریتی سامانه اطلاعات جغرافیایی داوطلبانه</p>
+                    <br/>
+                    <br/>
                     <Link to="/register">
-                      <CButton color="primary" className="mt-3" active tabIndex={-1}>Register Now!</CButton>
+                      <CButton color="primary" className="mt-3" active tabIndex={-1}>ثبت نام کاربر</CButton>
                     </Link>
                   </div>
                 </CCardBody>
@@ -73,6 +122,5 @@ const Login = () => {
       </CContainer>
     </div>
   )
-}
-
+};
 export default Login

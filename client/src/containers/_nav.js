@@ -31,6 +31,39 @@ export default [
   {
     _tag: 'CSidebarNavTitle',
     _children: ['Components']
+  },{
+    _tag: 'CSidebarNavDropdown',
+    name: 'اطلاعات مکانی',
+    icon: 'cil-puzzle',
+    _children: [
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'مدیریت لایه ها',
+        to: '/layers',
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'اضافه کردن لایه',
+        to: '/layers/createLayer',
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'مدیریت عارضه ها',
+        to: '/features',
+      },
+    ]
+  },
+  {
+    _tag: 'CSidebarNavDropdown',
+    name: 'کاربران',
+    icon: 'cil-puzzle',
+    _children: [
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'مدیریت کاربران',
+        to: '/users',
+      },
+    ]
   },
   {
     _tag: 'CSidebarNavDropdown',

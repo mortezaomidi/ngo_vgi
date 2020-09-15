@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {
   CButton,
   CCard,
@@ -14,31 +14,88 @@ import {
   CRow
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
+import {create} from "../../user/UserAPI";
+import classes from '../../user/user.module.css';
+import {toast, ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import errorHandler from "../../../../../server/helpers/dbErrorHandler";
 
-const Register = () => {
+
+const Register = (props) => {
+
+  const [values, setValues] = useState({
+    name: '',
+    password: '',
+    email: '',
+    open: false,
+    error: ''
+  });
+
+  const handleChange = name => event => {
+    setValues({ ...values, [name]: event.target.value })
+  };
+
+  const clickSubmit = () => {
+    const user = {
+      name: values.name || undefined,
+      email: values.email || undefined,
+      password: values.password || undefined
+    };
+    create(user).then((data) => {
+      if (data.error) {
+        setValues({ ...values, error: data.error});
+        toast.error('اطلاعات وارد شده نادرست است')
+      } else {
+        setValues({ ...values, error: '', open: true})
+        props.history.replace('./login');
+      }
+    })
+  };
+
+
   return (
     <div className="c-app c-default-layout flex-row align-items-center">
+      <ToastContainer
+        rtl={true}
+        autoClose={1500}
+      />
       <CContainer>
         <CRow className="justify-content-center">
-          <CCol md="9" lg="7" xl="6">
+          <CCol md="8" lg="6" xl="5">
             <CCard className="mx-4">
               <CCardBody className="p-4">
                 <CForm>
-                  <h1>Register</h1>
-                  <p className="text-muted">Create your account</p>
+                  <h5 style={{textAlign:'center'}}>SignUp</h5>
                   <CInputGroup className="mb-3">
                     <CInputGroupPrepend>
                       <CInputGroupText>
                         <CIcon name="cil-user" />
                       </CInputGroupText>
                     </CInputGroupPrepend>
-                    <CInput type="text" placeholder="Username" autoComplete="username" />
+                    <CInput
+                      type="text"
+                      placeholder="Name"
+                      autoComplete="name"
+                      required
+                      value={values.name}
+                      onChange={handleChange('name')}
+                      className={classes.placeholderStyle}
+
+                    />
                   </CInputGroup>
                   <CInputGroup className="mb-3">
                     <CInputGroupPrepend>
                       <CInputGroupText>@</CInputGroupText>
                     </CInputGroupPrepend>
-                    <CInput type="text" placeholder="Email" autoComplete="email" />
+                    <CInput
+                      type="text"
+                      placeholder="Email"
+                      autoComplete="email"
+                      required
+                      value={values.email}
+                      onChange={handleChange('email')}
+                      className={classes.placeholderStyle}
+                    />
                   </CInputGroup>
                   <CInputGroup className="mb-3">
                     <CInputGroupPrepend>
@@ -46,29 +103,20 @@ const Register = () => {
                         <CIcon name="cil-lock-locked" />
                       </CInputGroupText>
                     </CInputGroupPrepend>
-                    <CInput type="password" placeholder="Password" autoComplete="new-password" />
+                    <CInput
+                      type="password"
+                      placeholder="Password"
+                      autoComplete="new-password"
+                      required
+                      value={values.password}
+                      onChange={handleChange('password')}
+                      className={classes.placeholderStyle}
+
+                    />
                   </CInputGroup>
-                  <CInputGroup className="mb-4">
-                    <CInputGroupPrepend>
-                      <CInputGroupText>
-                        <CIcon name="cil-lock-locked" />
-                      </CInputGroupText>
-                    </CInputGroupPrepend>
-                    <CInput type="password" placeholder="Repeat password" autoComplete="new-password" />
-                  </CInputGroup>
-                  <CButton color="success" block>Create Account</CButton>
+                  <CButton color="success" block onClick={()=>clickSubmit()}>Create Account</CButton>
                 </CForm>
               </CCardBody>
-              <CCardFooter className="p-4">
-                <CRow>
-                  <CCol xs="12" sm="6">
-                    <CButton className="btn-facebook mb-1" block><span>facebook</span></CButton>
-                  </CCol>
-                  <CCol xs="12" sm="6">
-                    <CButton className="btn-twitter mb-1" block><span>twitter</span></CButton>
-                  </CCol>
-                </CRow>
-              </CCardFooter>
             </CCard>
           </CCol>
         </CRow>
