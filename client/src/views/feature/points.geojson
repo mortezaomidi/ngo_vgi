@@ -1,0 +1,39 @@
+{
+  "type": "FeatureCollection",
+  "layer_name": "نقاط آزمایشی",
+  "layer_code": "1001",
+  "layer_type": "Point",
+  "SRS": 4326,
+  "features": [
+    {
+      "type": "Feature",
+      "id": "10010",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51,
+          33
+        ]
+      },
+      "properties": {
+        "prop0": "value0",
+        "prop1": "value1"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "10011",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          52,
+          31
+        ]
+      },
+      "properties": {
+        "prop0": "value0",
+        "prop1": "value1"
+      }
+    }
+  ]
+}

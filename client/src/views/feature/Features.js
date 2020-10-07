@@ -1,14 +1,19 @@
 import React, { useEffect,useState } from 'react';
-import {Card} from "reactstrap";
+import {Card, CardBody, CardHeader, Col, Row} from "reactstrap";
+import FeatureSelection from "./FeatureSelection";
+import LayerSpecs from "../layer/LayerSpecs";
+import {ToastContainer} from "react-toastify";
 
 
 
 const Features = (props) =>{
 
   return(
-    <Card>
-      این صفحه هنوز تکمیل نشده است
-    </Card>
+    <React.Fragment>
+      <FeatureSelection name="عوارض نقطه ای" type="Point"/>
+      <FeatureSelection name="عوارض خطی" type="LineString"/>
+      <FeatureSelection name="عوارض سطحی" type="Polygon"/>
+    </React.Fragment>
   )
 };
 

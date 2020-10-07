@@ -1,6 +1,6 @@
-const path = require('path')
-const webpack = require('webpack')
-const CURRENT_WORKING_DIR = process.cwd()
+const path = require('path');
+const webpack = require('webpack');
+const CURRENT_WORKING_DIR = process.cwd();
 
 const config = {
     name: "browser",
@@ -15,6 +15,9 @@ const config = {
         filename: 'bundle.js',
         publicPath: '/dist/'
     },
+    node: {
+        fs: "empty"
+    },
     module: {
         rules: [
             {
@@ -22,7 +25,7 @@ const config = {
                 exclude: /node_modules/,
                 use: [
                     'babel-loader'
-                ]
+                ],
             },
             {
                 test: /\.(ttf|eot|svg|gif|jpg|png)(\?[\s\S]+)?$/,
@@ -54,7 +57,7 @@ const config = {
         alias: {
           'react-dom': '@hot-loader/react-dom'
         }
-    },
-}
+    }
+};
 
-module.exports = config
+module.exports = config;

@@ -27,6 +27,7 @@ const EditLayer = (props) => {
 
   const {layerId} = props.match.params;
   const user = auth.getToken();
+  const jwt = auth.isAuthenticated();
 
   const [loading, setLoading] = useState(true);
   const [specs, setSpecs] = useState({
@@ -42,7 +43,6 @@ const EditLayer = (props) => {
     error: '',
   });
 
-  const jwt = auth.isAuthenticated();
 
   useEffect(() => {
     const abortController = new AbortController();

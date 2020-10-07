@@ -13,6 +13,8 @@ import userRoutes from './routes/user.routes';
 import authRoutes from './routes/auth.routes';
 import layerRoutes from './routes/layer.routes';
 import layerSpecsRoutes from './routes/layerSpecs.routes';
+import featureRoutes from './routes/feature.routes';
+
 
 
 const CURRENT_WORKING_DIR = process.cwd();
@@ -26,10 +28,17 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(compress());
+
+
 // secure apps by setting various HTTP headers
 app.use(helmet());
 // enable CORS - Cross Origin Resource Sharing
 app.use(cors());
+
+app.use(function(req, res, next) {
+    res.setHeader("Content-Security-Policy", "worker-src 'self' blob:");
+    return next();
+});
 
 app.use('/dist', express.static(path.join(CURRENT_WORKING_DIR, 'dist')));
 
@@ -37,10 +46,15 @@ app.use('/', userRoutes);
 app.use('/', authRoutes);
 app.use('/', layerRoutes);
 app.use('/', layerSpecsRoutes);
+app.use('/', featureRoutes);
+
+
 
 app.get('*', (req,res) => {
     res.status(200).send(Template());
 });
+
+
 
 // Catch unauthorised errors
 app.use((err, req, res, next) => {
@@ -51,5 +65,6 @@ app.use((err, req, res, next) => {
         console.log(err)
     }
 });
+
 
 export default app
