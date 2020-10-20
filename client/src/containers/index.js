@@ -11,11 +11,11 @@ import TheSidebar from './TheSidebar'
 export {
   TheContent,
   TheFooter,
-  TheHeader,
-  TheHeaderDropdown,
-  TheHeaderDropdownMssg,
-  TheHeaderDropdownNotif,
-  TheHeaderDropdownTasks,
+  // TheHeader,
+  // TheHeaderDropdown,
+  // TheHeaderDropdownMssg,
+  // TheHeaderDropdownNotif,
+  // TheHeaderDropdownTasks,
   TheLayout,
   TheSidebar
 }

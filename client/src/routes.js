@@ -44,6 +44,8 @@ const EditLayer = React.lazy(() => import('./views/layer/EditLayer'));
 const Features = React.lazy(() => import('./views/feature/Features'));
 const CreateFeature = React.lazy(() => import('./views/feature/createFeature'));
 const EditFeature = React.lazy(() => import('./views/feature/EditFeature'));
+const MapDisplay = React.lazy(() => import('./views/Map/MapDisplay'));
+const TestComponent = React.lazy(() => import('./views/test/TestComponent'));
 
 const routes = [
   { path: '/', exact: true, name: 'خانه' },
@@ -93,6 +95,8 @@ const routes = [
   { path: '/features', exact: true, name: 'مدیریت عوارض', component: Features },
   { path: '/features/createFeature', exact: true, name: 'اضافه کردن عارضه', component: CreateFeature },
   { path: '/features/:featureId', exact: true, name: 'ویرایش عارضه', component: EditFeature },
+  { path: '/Map', exact: true, name: 'نقشه', component: MapDisplay },
+  { path: '/TestComponent', exact: true, name: 'آزمایشی', component: TestComponent },
 ];
 
 export default routes;

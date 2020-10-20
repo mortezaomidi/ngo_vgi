@@ -113,7 +113,7 @@ const FeatureDetails = (props) => {
                           style="mapbox://styles/mapbox/streets-v9" // eslint-disable-line
                           sprite= "mapbox://sprites/mapbox/bright-v9"
                           center={[feature.geometry.coordinates[0], feature.geometry.coordinates[1]]}
-                          zoom={[17]}
+                          zoom={[12]}
                           containerStyle={{
                             height: "300px",
                             width: "60%",
@@ -137,7 +137,7 @@ const FeatureDetails = (props) => {
                           style="mapbox://styles/mapbox/streets-v9" // eslint-disable-line
                           sprite= "mapbox://sprites/mapbox/bright-v9"
                           center={[feature.geometry.coordinates[0][0], feature.geometry.coordinates[0][1]]}
-                          zoom={[15]}
+                          zoom={[9]}
                           containerStyle={{
                             height: "300px",
                             width: "60%",
@@ -161,7 +161,7 @@ const FeatureDetails = (props) => {
                             style="mapbox://styles/mapbox/streets-v9" // eslint-disable-line
                             sprite= "mapbox://sprites/mapbox/bright-v9"
                             center={[feature.geometry.coordinates[0][0][0], feature.geometry.coordinates[0][0][1]]}
-                            zoom={[15]}
+                            zoom={[9]}
                             containerStyle={{
                               height: "300px",
                               width: "60%",

@@ -4,7 +4,7 @@ import {
   TheContent,
   TheSidebar,
   TheFooter,
-  TheHeader
+  // TheHeader
 } from './index'
 import {AuthContext} from "../auth/auth-context";
 
@@ -20,11 +20,11 @@ const TheLayout = (props) => {
     <div className="c-app c-default-layout">
       <TheSidebar/>
       <div className="c-wrapper">
-        <TheHeader/>
+        {/*<TheHeader/>*/}
         <div className="c-body">
           <TheContent/>
         </div>
-        <TheFooter/>
+        {/*<TheFooter/>*/}
       </div>
     </div>
   )

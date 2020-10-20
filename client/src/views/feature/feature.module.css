@@ -7,6 +7,10 @@
   margin: 8px;
 }
 
+.featureSpecsEdit{
+  padding: 7px;
+}
+
 .removeIconsPicturesProduct{
   position: absolute;
   left: 105px;
@@ -34,3 +38,26 @@
   margin-top: 35px;
   margin-bottom: 20px;
 }
+
+.mapContainer{
+  top:0;
+  bottom:0;
+  width: 60%;
+  height: 300px;
+  margin: auto;
+}
+
+.coordinates {
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  position: absolute;
+  bottom: 40px;
+  left: 10px;
+  padding: 5px 10px;
+  margin: 0;
+  font-size: 11px;
+  line-height: 18px;
+  border-radius: 3px;
+  display: none;
+}
+

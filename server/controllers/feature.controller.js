@@ -42,7 +42,7 @@ const read = (req, res) => {
 
 const list = async (req, res) => {
     try {
-        let features = await Feature.find().select('name layerID userID geometry.type geometry.coordinates valid createdAt updatedAt');
+        let features = await Feature.find().select('name layerID userID geometry.type geometry.coordinates attribute valid createdAt updatedAt');
         res.json(features)
     } catch (err) {
         return res.status(400).json({

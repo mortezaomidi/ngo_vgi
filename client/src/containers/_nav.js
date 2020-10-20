@@ -39,6 +39,11 @@ export default [
     _children: [
       {
         _tag: 'CSidebarNavItem',
+        name: 'نقشه',
+        to: '/Map',
+      },
+      {
+        _tag: 'CSidebarNavItem',
         name: 'مدیریت لایه ها',
         to: '/layers',
       },
@@ -71,6 +76,18 @@ export default [
       },
     ]
   },
+  // {
+  //   _tag: 'CSidebarNavDropdown',
+  //   name: 'آزمایش',
+  //   icon: 'cil-puzzle',
+  //   _children: [
+  //     {
+  //       _tag: 'CSidebarNavItem',
+  //       name: 'آزامیش کامپوننت',
+  //       to: '/TestComponent',
+  //     },
+  //   ]
+  // },
   // {
   //   _tag: 'CSidebarNavDropdown',
   //   name: 'Base',

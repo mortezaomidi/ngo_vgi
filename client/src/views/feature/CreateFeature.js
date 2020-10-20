@@ -18,6 +18,7 @@ const Map = ReactMapboxGl({
     'pk.eyJ1IjoibWFzb3VkMTIzIiwiYSI6ImNqNTd2OGMwNTE0cm4ycW9hZHY4OTl1M3cifQ.3x-EMOwB6lyHZqYF0eyZFw'
 });
 
+
 const CreateFeature = (props) => {
 
 
@@ -54,7 +55,9 @@ const CreateFeature = (props) => {
       let tempGeometry = await features[0].geometry;
       setGeometry(tempGeometry);
     }
+    // console.log(features)
   };
+
 
   const onDrawUpdate = async ({ features }) => {
     let tempGeometry = await features[0].geometry;
@@ -96,12 +99,11 @@ const CreateFeature = (props) => {
       }
     }).catch(error=>{
       console.log(error);
-    })
+    });
 
   };
 
   const handleAttValue = async (name, event, index) =>{
-
     const tempAttributes = [...attributes];
     tempAttributes[index] = {name: name, value: event.target.value};
     await setAttributes(tempAttributes);
